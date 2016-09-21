@@ -1,0 +1,127 @@
+<!--
+  Copyright 2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="Invert">
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
+    <input type="text" id="node-input-topic" placeholder="topic">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Invert">
+  <p>A node to invert numerical and boolean inputs</p>
+  <p>Outputs are always 1 or 0</p>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('Invert',{
+	category: 'logic',
+	color: 'grey',
+	defaults: {
+		topic: {value: ""}
+	},
+	inputs: 1,
+	outputs: 1,
+	icon: 'alert.png',
+	label: 'Invert'
+});
+</script>
+
+
+<script type="text/x-red" data-template-name="Or">
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
+    <input type="text" id="node-input-topic" placeholder="Topic">
+  </div>
+  <div class="form-row">
+    <label for="node-input-inputs"><i class="fa fa-tasks"></i> # inputs</label>
+    <input type="text" id="node-input-inputs" placeholder="Inputs">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Or">
+  <p>A 'OR' gate node</p>
+  <p>Outputs are always 1 or 0</p>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('Or',{
+	category: 'logic',
+	color: 'grey',
+	defaults: {
+		topic: {value: ""},
+		inputs: {value: 2}
+	},
+	inputs: 1,
+	outputs: 1,
+	icon: 'or.png',
+	label: 'Or'
+});
+</script>
+
+<script type="text/x-red" data-template-name="And">
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
+    <input type="text" id="node-input-topic" placeholder="Topic">
+  </div>
+  <div class="form-row">
+        <label for="node-input-inputs"><i class="fa fa-tasks"></i> # inputs</label>
+        <input type="text" id="node-input-inputs" placeholder="Inputs">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="And">
+  <p>A 'AND' gate node</p>
+  <p>Outputs are always 1 or 0</p>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('And',{
+	category: 'logic',
+	color: 'grey',
+	defaults: {
+		inputs: {value: 2}
+	},
+	inputs: 1,
+	outputs: 1,
+	icon: 'and.png',
+	label: 'And'
+});
+</script>
+
+
+<script type="text/x-red" data-template-name="Equals">
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
+    <input type="text" id="node-input-topic" placeholder="Topic">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Equals">
+  <p>A node to compare 2 outputs</p>
+  <p>Outputs are always 1 or 0</p>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('Equals',{
+	category: 'logic',
+	color: 'grey',
+	defaults: {
+		topic: {value: ""}
+	},
+	inputs: 1,
+	outputs: 1,
+	icon: 'equals.png',
+	label: 'Invert'
+});
+</script>
