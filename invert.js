@@ -50,6 +50,7 @@ module.exports = function(RED) {
 
 		this.on('input', function(msg){
 
+			//add or replace
 			if (node.values[msg.topic]) {
 				node.values[msg.topic] = msg.payload;
 			} else if (node.values.keys.length < node.inputCount) {
