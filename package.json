@@ -7,10 +7,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tyrrellsytems/node-red-contrib-basic-logic"
+    "url": "https://github.com/tyrrellsystems/node-red-contrib-basic-logic"
   },
   "bugs" : {
-    "url": "https://github.com/tyrrellsytems/node-red-contrib-basic-logic/issues"
+    "url": "https://github.com/tyrrellsystems/node-red-contrib-basic-logic/issues"
   },
   "keywords": [
     "Node-RED"
