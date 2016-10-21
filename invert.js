@@ -45,7 +45,7 @@ module.exports = function(RED) {
 		RED.nodes.createNode(this,n);
 		var node = this;
 		this.topic = n.topic;
-		this.inputCount = n.inputs;
+		this.inputCount = n.inputCount;
 		this.values = {};
 
 		this.on('input', function(msg){
@@ -57,8 +57,9 @@ module.exports = function(RED) {
 				node.values[msg.topic] = msg.payload;
 			}
 
-			for (k in Object.keys(node.values)) {
-				if (node.values[k]) {
+			var keys = Object.keys(node.values);
+			for (var k in Object.keys(node.values)) {
+				if (node.values[keys[k]]) {
 					node.send({
 						topic: node.topic,
 						payload : true
@@ -78,29 +79,34 @@ module.exports = function(RED) {
 		RED.nodes.createNode(this,n);
 		var node = this;
 		this.topic = n.topic;
-		this.inputCount = n.inputs;
+		this.inputCount = n.inputCount;
 		this.values = {};
 
 		this.on('input', function(msg){
-			if (node.values[msg.topic]) {
+
+			var keys = Object.keys(node.values);
+			if (keys.indexOf(msg.topic) != -1) {
 				node.values[msg.topic] = msg.payload;
 			} else if (Object.keys(node.values).length < node.inputCount) {
 				node.values[msg.topic] = msg.payload
 			}
 
-			for (k in Object.keys(node.values)) {
-				if (!node.values[k]) {
-					node.send({
-						topic: node.topic,
-						payload: false
-					});
-					return;
+			keys = Object.keys(node.values);
+			if (keys.length == node.inputCount) {
+				for (var k in Object.keys(node.values)) {
+					if (!node.values[keys[k]]) {
+						node.send({
+							topic: node.topic,
+							payload: false
+						});
+						return;
+					}
 				}
+				node.send({
+					topic: node.topic,
+					payload: true
+				});
 			}
-			node.send({
-				topic: node.topic,
-				payload: true
-			});
 		});
 	}
 	RED.nodes.registerType("And", and);

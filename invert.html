@@ -37,15 +37,14 @@ RED.nodes.registerType('Invert',{
 });
 </script>
 
-
 <script type="text/x-red" data-template-name="Or">
   <div class="form-row">
     <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
     <input type="text" id="node-input-topic" placeholder="Topic">
   </div>
   <div class="form-row">
-    <label for="node-input-inputs"><i class="fa fa-tasks"></i> # inputs</label>
-    <input type="text" id="node-input-inputs" placeholder="Inputs">
+    <label for="node-input-inputCount"><i class="fa fa-tasks"></i> # inputs</label>
+    <input type="text" id="node-input-inputCount" placeholder="Inputs">
   </div>
 </script>
 
@@ -56,16 +55,16 @@ RED.nodes.registerType('Invert',{
 
 <script type="text/javascript">
 RED.nodes.registerType('Or',{
-	category: 'logic',
-	color: 'grey',
-	defaults: {
-		topic: {value: ""},
-		inputs: {value: 2}
-	},
-	inputs: 1,
-	outputs: 1,
-	icon: 'or.png',
-	label: 'Or'
+  category: 'logic',
+  color: 'grey',
+  defaults: {
+    topic: {value: ""},
+    inputCount: {value: 2}
+  },
+  inputs: 1,
+  outputs: 1,
+  icon: 'or.png',
+  label: 'Or'
 });
 </script>
 
@@ -75,9 +74,9 @@ RED.nodes.registerType('Or',{
     <input type="text" id="node-input-topic" placeholder="Topic">
   </div>
   <div class="form-row">
-        <label for="node-input-inputs"><i class="fa fa-tasks"></i> # inputs</label>
-        <input type="text" id="node-input-inputs" placeholder="Inputs">
-    </div>
+    <label for="node-input-inputCount"><i class="fa fa-tasks"></i> # inputs</label>
+    <input type="text" id="node-input-inputCount" placeholder="Inputs">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="And">
@@ -90,7 +89,7 @@ RED.nodes.registerType('And',{
 	category: 'logic',
 	color: 'grey',
 	defaults: {
-		inputs: {value: 2}
+		inputCount: {value: 2}
 	},
 	inputs: 1,
 	outputs: 1,
