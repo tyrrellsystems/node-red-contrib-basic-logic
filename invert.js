@@ -25,15 +25,15 @@ module.exports = function(RED) {
 		this.on('input', function(msg){
 			if (typeof msg.payload === 'string') {
 				if (msg.payload === 'on' || msg.payload === 'true') {
-				    msg.payload = 0;
+				    msg.payload = false;
 				} else {
-					msg.payload = 1;
+					msg.payload = true;
 				}
 			} else if (typeof msg.payload === 'number' || typeof msg.payload === 'boolean') {
 				if (msg.payload) {
-					msg.payload = 0;
+					msg.payload = false;
 				} else {
-					msg.payload = 1;
+					msg.payload = true;
 				}
 			}
 			node.send(msg);
@@ -53,19 +53,23 @@ module.exports = function(RED) {
 			//add or replace
 			if (node.values[msg.topic]) {
 				node.values[msg.topic] = msg.payload;
-			} else if (node.values.keys.length < node.inputCount) {
+			} else if (Object.keys(node.values).length < node.inputCount) {
 				node.values[msg.topic] = msg.payload;
 			}
 
-			for (k in node.values.keys) {
+			for (k in Object.keys(node.values)) {
 				if (node.values[k]) {
 					node.send({
 						topic: node.topic,
-						payload : 1
+						payload : true
 					});
 					return;
 				}
 			}
+			node.send({
+				topic:node.topic,
+				payload: false
+			})
 		});
 	}
 	RED.nodes.registerType("Or", or);
@@ -78,19 +82,38 @@ module.exports = function(RED) {
 		this.values = {};
 
 		this.on('input', function(msg){
+			if (node.values[msg.topic]) {
+				node.values[msg.topic] = msg.payload;
+			} else if (Object.keys(node.values).length < node.inputCount) {
+				node.values[msg.topic] = msg.payload
+			}
 
+			for (k in Object.keys(node.values)) {
+				if (!node.values[k]) {
+					node.send({
+						topic: node.topic,
+						payload: false
+					});
+					return;
+				}
+			}
+			node.send({
+				topic: node.topic,
+				payload: true
+			});
 		});
 	}
 	RED.nodes.registerType("And", and);
 
 	function equals(n) {
 		RED.nodes.createNode(this,n);
-		var node = this;
 		this.topic = n.topic;
 		this.values = {};
 
+		var node = this;
+
 		this.on('input', function(msg){
-			if (node.values.keys.length < 2) {
+			if (Object.keys(node.values).length < 2) {
 				node.values[msg.topic] = msg.payload;
 			} else {
 				if (node.values[msg.topic]) {
@@ -102,13 +125,16 @@ module.exports = function(RED) {
 			}
 			var m = {
 				topic: node.topic,
-				payload: 0
+				payload: false
 			};
-			if (node.values[node.values.keys[0]] == node.values[node.values.keys[1]]) {
-				m.payload = 1;
-			}
 
-			node.send(m);
+			if (Object.keys(node.values).length == 2) {
+				if (node.values[Object.keys(node.values)[0]] == node.values[Object.keys(node.values)[1]]) {
+					m.payload = true;
+				}
+
+				node.send(m);
+			}
 		});
 	}
 	RED.nodes.registerType("Equals", equals);
