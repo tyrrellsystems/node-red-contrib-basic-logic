@@ -20,7 +20,13 @@
 
 <script type="text/x-red" data-help-name="Invert">
   <p>A node to invert numerical and boolean inputs</p>
-  <p>Outputs are always 1 or 0</p>
+  <p>Inputs: msg.payload with any of the following values</p>
+  <ul>
+    <li>1/0</li>
+    <li>on/off</li>
+    <li>true/false</li>
+  </ul>
+  <p>Outputs are always 1 or 0 and the inverse of the input.</p>
 </script>
 
 <script type="text/javascript">
@@ -50,6 +56,15 @@ RED.nodes.registerType('Invert',{
 
 <script type="text/x-red" data-help-name="Or">
   <p>A 'OR' gate node</p>
+  <p>Inputs: msg.payload with any of the following values:</p>
+  <ul>
+    <li>1/0</li>
+    <li>on/off</li>
+    <li>true/false</li>
+  </ul>
+  <p>Inputs are distinguished by topic and it will consider all inputs 
+  until <i># inputs</i> is reached. Subsquent messages with matching
+  topics replace earlier values.</p>
   <p>Outputs are always 1 or 0</p>
 </script>
 
@@ -81,6 +96,15 @@ RED.nodes.registerType('Or',{
 
 <script type="text/x-red" data-help-name="And">
   <p>A 'AND' gate node</p>
+  <p>Inputs: msg.payload with any of the following values:</p>
+  <ul>
+    <li>1/0</li>
+    <li>on/off</li>
+    <li>true/false</li>
+  </ul>
+  <p>Inputs are distinguished by topic and will wait for the <i># inputs</i> 
+  messages to arrive before giving an output. Subsquent messages with matching
+  topics replace earlier values.</p>
   <p>Outputs are always 1 or 0</p>
 </script>
 
@@ -107,7 +131,15 @@ RED.nodes.registerType('And',{
 </script>
 
 <script type="text/x-red" data-help-name="Equals">
-  <p>A node to compare 2 outputs</p>
+  <p>A node to compare 2 inputs based on <i>msg.topic</i>. After
+  2 distinct messags are recieved mesages with different topics 
+  will be ignored.</p>
+  <p>Inputs: msg.payload with any of the following values:</p>
+  <ul>
+    <li>1/0</li>
+    <li>on/off</li>
+    <li>true/false</li>
+  </ul>
   <p>Outputs are always 1 or 0</p>
 </script>
 
